@@ -14,27 +14,18 @@ public class ProductBasket {
         products[size++] = product;
     }
 
-    public int getTotalPrice() {
-        if (size == 0) {
-            return -1; // Или любое другое значение, обозначающее пустую корзину
-        }
-        int totalPrice = 0;
-        for (int i = 0; i < size; i++) {
-            totalPrice += products[i].getPrice();
-        }
-        return totalPrice;
-    }
-
     public void printBasket() {
         if (size == 0) {
             System.out.println("Basket is empty");
             System.out.println("Total: 0 rubles\n");
             return;
         }
+        int totalPrice = 0;
         for (int i = 0; i < size; i++) {
             System.out.println(products[i].getProductName() + ": " + products[i].getPrice());
+            totalPrice += products[i].getPrice();
         }
-        System.out.println("Total: " + getTotalPrice() + " rubles\n");
+        System.out.println("Total: " + totalPrice + " rubles\n");
     }
 
     public boolean containsProduct(String productName) {
