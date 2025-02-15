@@ -21,11 +21,16 @@ public class ProductBasket {
             return;
         }
         int totalPrice = 0;
+        int specialCount = 0;
         for (int i = 0; i < size; i++) {
-            System.out.println(products[i].getProductName() + ": " + products[i].getPrice());
+            System.out.println(products[i]);
             totalPrice += products[i].getPrice();
+            if (products[i].isSpecial()) {
+                specialCount++;
+            }
         }
         System.out.println("Total: " + totalPrice + " rubles\n");
+        System.out.println("Special products: " + specialCount + "\n");
     }
 
     public boolean containsProduct(String productName) {
