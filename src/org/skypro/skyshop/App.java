@@ -5,7 +5,6 @@ import org.skypro.skyshop.product.*;
 
 import java.util.Arrays;
 
-
 public class App {
     public static void main(String[] args) {
         ProductBasket basket = new ProductBasket();
