@@ -1,6 +1,9 @@
 package org.skypro.skyshop;
+
 import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.*;
+
+import java.util.Arrays;
 
 public class App {
     public static void main(String[] args) {
@@ -17,11 +20,23 @@ public class App {
 
         basket.printBasket();
 
-        System.out.println("Contains Cake: " + basket.containsProduct("Cake") + "\n");
-        System.out.println("Contains Yogurt: " + basket.containsProduct("Yogurt") + "\n");
+        Article article1 = new Article("How to choose ice-cream", "Ice-cream is a delicious dessert...");
+        Article article2 = new Article("History of chocolate", "Chocolate has a rich history...");
 
-        basket.clearBasket();
-        basket.printBasket();
-        System.out.println("Contains Cake: " + basket.containsProduct("Cake") + "\n");
+        SearchEngine searchEngine = new SearchEngine(10);
+        searchEngine.add(product1);
+        searchEngine.add(product2);
+        searchEngine.add(product3);
+        searchEngine.add(article1);
+        searchEngine.add(article2);
+
+        // Демонстрация поиска
+        System.out.println("Search results for 'cake':");
+        Searchable[] results = searchEngine.search("cake");
+        System.out.println(Arrays.toString(results));
+
+        System.out.println("Search results for 'chocolate':");
+        results = searchEngine.search("chocolate");
+        System.out.println(Arrays.toString(results));
     }
 }
