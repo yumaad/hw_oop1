@@ -16,19 +16,34 @@ public class SearchEngine {
         }
     }
 
-    public Searchable[] search(String query) {
-        Searchable[] results = new Searchable[5];
-        int count = 0;
+    public Searchable findBestMatch(String search) throws BestResultNotFound {
+        Searchable bestMatch = null;
+        int maxCount = -1;
 
         for (Searchable searchable : searchables) {
-            if (searchable != null && searchable.getSearchTerm().contains(query)) {
-                results[count++] = searchable;
-                if (count == 5) {
-                    break;
+            if (searchable != null) {
+                int count = countOccurrences(searchable.getSearchTerm(), search);
+                if (count > maxCount) {
+                    maxCount = count;
+                    bestMatch = searchable;
                 }
             }
         }
 
-        return results;
+        if (bestMatch == null) {
+            throw new BestResultNotFound("No matching result found for: " + search);
+        }
+
+        return bestMatch;
+    }
+
+    private int countOccurrences(String text, String substring) {
+        int count = 0;
+        int index = 0;
+        while ((index = text.indexOf(substring, index)) != -1) {
+            count++;
+            index += substring.length();
+        }
+        return count;
     }
 }

@@ -7,6 +7,9 @@ public abstract class Product implements Searchable{
     private final String productName;
 
     public Product(String productName) {
+        if (productName == null || productName.isBlank()) {
+            throw new IllegalArgumentException("Product name cannot be null or empty.");
+        }
         this.productName = productName;
     }
 
