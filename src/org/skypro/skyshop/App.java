@@ -44,26 +44,18 @@ public class App {
         searchEngine.add(new DiscountedProduct("Cake", 100, 30));
         searchEngine.add(new FixPriceProduct("Chocolate"));
 
-        // Поиск по запросу "cake"
-        try {
-            List<Searchable> bestMatches = searchEngine.findBestMatch("cake");
-            System.out.println("Best matches for 'cake':");
-            for (Searchable match : bestMatches) {
-                System.out.println(match.getStringRepresentation());
-            }
-        } catch (BestResultNotFound e) {
-            System.out.println("Error: " + e.getMessage());
+        // Поиск по запросу "cake" с использованием метода search
+        List<Searchable> searchResults = searchEngine.search("cake");
+        System.out.println("Search results for 'cake':");
+        for (Searchable result : searchResults) {
+            System.out.println(result.getStringRepresentation());
         }
 
-        // Поиск по запросу "yogurt" (несуществующий продукт)
-        try {
-            List<Searchable> bestMatches = searchEngine.findBestMatch("yogurt");
-            System.out.println("Best matches for 'yogurt':");
-            for (Searchable match : bestMatches) {
-                System.out.println(match.getStringRepresentation());
-            }
-        } catch (BestResultNotFound e) {
-            System.out.println("Error: " + e.getMessage());
+        // Поиск по запросу "ice" с использованием метода search
+        List<Searchable> iceResults = searchEngine.search("ice");
+        System.out.println("Search results for 'ice':");
+        for (Searchable result : iceResults) {
+            System.out.println(result.getStringRepresentation());
         }
     }
 }
