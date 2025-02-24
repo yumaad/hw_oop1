@@ -7,6 +7,8 @@ import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 
 import java.util.List;
+import java.util.Map;
+
 
 public class App {
     public static void main(String[] args) {
@@ -45,17 +47,17 @@ public class App {
         searchEngine.add(new FixPriceProduct("Chocolate"));
 
         // Поиск по запросу "cake" с использованием метода search
-        List<Searchable> searchResults = searchEngine.search("cake");
+        Map<String, Searchable> searchResults = searchEngine.search("cake");
         System.out.println("Search results for 'cake':");
-        for (Searchable result : searchResults) {
-            System.out.println(result.getStringRepresentation());
+        for (Map.Entry<String, Searchable> entry : searchResults.entrySet()) {
+            System.out.println(entry.getValue().getStringRepresentation());
         }
 
         // Поиск по запросу "ice" с использованием метода search
-        List<Searchable> iceResults = searchEngine.search("ice");
+        Map<String, Searchable> iceResults = searchEngine.search("ice");
         System.out.println("Search results for 'ice':");
-        for (Searchable result : iceResults) {
-            System.out.println(result.getStringRepresentation());
+        for (Map.Entry<String, Searchable> entry : iceResults.entrySet()) {
+            System.out.println(entry.getValue().getStringRepresentation());
         }
     }
 }
