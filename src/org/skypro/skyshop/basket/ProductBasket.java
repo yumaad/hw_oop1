@@ -2,30 +2,30 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class ProductBasket {
-    private final List<Product> products = new ArrayList<>();
+    private final Map<String, List<Product>> productsMap = new HashMap<>();
 
     public void addProduct(Product product) {
-        products.add(product);
+        productsMap.computeIfAbsent(product.getProductName(), k -> new ArrayList<>()).add(product);
     }
 
     public void printBasket() {
-        if (products.isEmpty()) {
+        if (productsMap.isEmpty()) {
             System.out.println("Basket is empty");
             System.out.println("Total: 0 rubles\n");
             return;
         }
         int totalPrice = 0;
         int specialCount = 0;
-        for (Product product : products) {
-            System.out.println(products);
-            totalPrice += product.getPrice();
-            if (product.isSpecial()) {
-                specialCount++;
+        for (List<Product> productList : productsMap.values()) {
+            for (Product product : productList) {
+                System.out.println(product);
+                totalPrice += product.getPrice();
+                if (product.isSpecial()) {
+                    specialCount++;
+                }
             }
         }
         System.out.println("Total: " + totalPrice + " rubles\n");
@@ -33,20 +33,13 @@ public class ProductBasket {
     }
 
     public List<Product> removeProductByName(String productName) {
-        List<Product> removedProducts = new ArrayList<>();
-        Iterator<Product> iterator = products.iterator();
-        while (iterator.hasNext()) {
-            Product product = iterator.next();
-            if (product.getProductName().equals(productName)) {
-                removedProducts.add(product);
-                iterator.remove();
-            }
-        }
-        return removedProducts;
+        List<Product> removedProducts = productsMap.remove(productName);
+        return removedProducts != null ? removedProducts : Collections.emptyList();
     }
 
+
     public void clearBasket() {
-        products.clear();
+        productsMap.clear();
 
     }
 }
