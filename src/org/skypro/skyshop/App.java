@@ -22,7 +22,6 @@ public class App {
         System.out.println("Initial basket:");
         basket.printBasket();
 
-        // Удаляем продукт по имени
         List<Product> removedProducts = basket.removeProductByName("Ice-cream");
         System.out.println("Removed products:");
         for (Product product : removedProducts) {
@@ -32,7 +31,6 @@ public class App {
         System.out.println("Basket after removal:");
         basket.printBasket();
 
-        // Пытаемся удалить несуществующий продукт
         List<Product> emptyList = basket.removeProductByName("Yogurt");
         if (emptyList.isEmpty()) {
             System.out.println("Список пуст");
@@ -46,14 +44,12 @@ public class App {
         searchEngine.add(new DiscountedProduct("Cake", 100, 30));
         searchEngine.add(new FixPriceProduct("Chocolate"));
 
-        // Поиск по запросу "cake" с использованием метода search
         Map<String, Searchable> searchResults = searchEngine.search("cake");
         System.out.println("Search results for 'cake':");
         for (Map.Entry<String, Searchable> entry : searchResults.entrySet()) {
             System.out.println(entry.getValue().getStringRepresentation());
         }
 
-        // Поиск по запросу "ice" с использованием метода search
         Map<String, Searchable> iceResults = searchEngine.search("ice");
         System.out.println("Search results for 'ice':");
         for (Map.Entry<String, Searchable> entry : iceResults.entrySet()) {

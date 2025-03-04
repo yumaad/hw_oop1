@@ -17,7 +17,7 @@ public class SearchEngine {
     }
 
     public Map<String, Searchable> search(String query) {
-        Map<String, Searchable> matches = new TreeMap<>(); // TreeMap для автоматической сортировки по ключам
+        Map<String, Searchable> matches = new TreeMap<>();
         for (Searchable searchable : searchables) {
             if (searchable != null && searchable.getSearchTerm().toLowerCase().contains(query.toLowerCase())) {
                 matches.put(searchable.getName(), searchable);
