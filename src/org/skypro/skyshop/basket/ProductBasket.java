@@ -17,17 +17,18 @@ public class ProductBasket {
             System.out.println("Total: 0 rubles\n");
             return;
         }
-        int totalPrice = 0;
-        int specialCount = 0;
-        for (List<Product> productList : productsMap.values()) {
-            for (Product product : productList) {
-                System.out.println(product);
-                totalPrice += product.getPrice();
-                if (product.isSpecial()) {
-                    specialCount++;
-                }
-            }
-        }
+
+        int totalPrice = productsMap.values().stream()
+                .flatMap(List::stream)
+                .peek(System.out::println)
+                .mapToInt(Product::getPrice)
+                .sum();
+
+        long specialCount = productsMap.values().stream()
+                .flatMap(List::stream)
+                .filter(Product::isSpecial)
+                .count();
+
         System.out.println("Total: " + totalPrice + " rubles\n");
         System.out.println("Special products: " + specialCount + "\n");
     }
