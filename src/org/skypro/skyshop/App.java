@@ -7,8 +7,7 @@ import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 
 import java.util.List;
-import java.util.Map;
-
+import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
@@ -33,7 +32,7 @@ public class App {
 
         List<Product> emptyList = basket.removeProductByName("Yogurt");
         if (emptyList.isEmpty()) {
-            System.out.println("Список пуст");
+            System.out.println("The list is empty\n");
         }
 
         System.out.println("Basket after trying to remove non-existent product:");
@@ -44,16 +43,17 @@ public class App {
         searchEngine.add(new DiscountedProduct("Cake", 100, 30));
         searchEngine.add(new FixPriceProduct("Chocolate"));
 
-        Map<String, Searchable> searchResults = searchEngine.search("cake");
+        Set<Searchable> searchResults = searchEngine.search("cake");
         System.out.println("Search results for 'cake':");
-        for (Map.Entry<String, Searchable> entry : searchResults.entrySet()) {
-            System.out.println(entry.getValue().getStringRepresentation());
+        for (Searchable result : searchResults) {
+            // Изменение: Используем getStringRepresentation() для вывода
+            System.out.println(result.getStringRepresentation());
         }
 
-        Map<String, Searchable> iceResults = searchEngine.search("ice");
+        Set<Searchable> iceResults = searchEngine.search("ice");
         System.out.println("Search results for 'ice':");
-        for (Map.Entry<String, Searchable> entry : iceResults.entrySet()) {
-            System.out.println(entry.getValue().getStringRepresentation());
+        for (Searchable result : iceResults) {
+            System.out.println(result.getStringRepresentation());
         }
     }
 }
